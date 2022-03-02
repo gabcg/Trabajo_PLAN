@@ -1,0 +1,31 @@
+---
+title: "PLAN"
+author: "Gabriel Carbonell, Eduardo Rodríguez, Lucas"
+date: "7/3/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción
+
+## Cálculo de potencia 
+
+Realizamos un experimento piloto con tres réplicas iniciales. Cada réplica pertenece a un bloque. Cargamos los datos:
+
+```{r}
+piloto <- read.csv2("piloto.csv", header = TRUE, sep = ";")
+piloto$Individual <- as.factor(piloto$Individual)
+piloto$Device <- as.factor(piloto$Device)
+piloto$Type <- as.factor(piloto$Type)
+```
+
+A continuación, realizamos un cálculo de potencia:
+
+```{r}
+ 
+```
+
+
