@@ -25,9 +25,8 @@ piloto$Type <- as.factor(piloto$Type)
 A continuación, realizamos un cálculo de potencia:
 
 ```{r}
-conflict
+Pull
 
-Pulllll
 ```
 
 
