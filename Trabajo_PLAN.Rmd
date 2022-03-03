@@ -26,6 +26,8 @@ A continuación, realizamos un cálculo de potencia:
 
 ```{r}
 conflict
+
+Pulllll
 ```
 
 
