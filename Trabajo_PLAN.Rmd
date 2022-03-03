@@ -22,10 +22,49 @@ piloto$Device <- as.factor(piloto$Device)
 piloto$Type <- as.factor(piloto$Type)
 ```
 
-A continuación, realizamos un cálculo de potencia:
+A continuación, realizamos el cálculo de potencia:
 
 ```{r}
 
+```
+
+## ANOVA
+
+En primer lugar, cargamos los datos
+
+```{r}
+palabras <- read.csv2("data.csv", header = TRUE, sep = ";")
+piloto$Individual <- as.factor(piloto$Individual)
+piloto$Device <- as.factor(piloto$Device)
+piloto$Type <- as.factor(piloto$Type)
+```
+
+Realizamos el ANOVA a partir del modelo propuesto.
+
+```{r}
+palabras.aov <- aov(Count ~ Device + Type, data = palabras)
+summary(palabras.aov)
+```
+
+Comprobamos las condiciones de aplicabilidad.
+
+```{r}
+par(mfrow = c(2,2))
+plot(palabras.aov)
+```
+
+## Estimación de parámetros del modelo
+
+```{r}
+mu <- mean(palabras$Count); mu
+model.tables(palabras.aov)
+```
+
+## Análisis post
+
+```{r}
+palabras.tukey <- TukeyHSD(palabras.tukey, ordered = T, which = "matriz")
+palabras.tukey
 ```
 
 
