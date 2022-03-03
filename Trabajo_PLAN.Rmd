@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Realizamos un experimento piloto con tres réplicas iniciales. Cada réplica pertenece a un bloque. Cargamos los datos:
 
 ```{r}
-piloto <- read.csv2("piloto.csv", header = TRUE, sep = ";")
+piloto <- read.csv2("data/piloto.csv", header = TRUE, sep = ";")
 piloto$Individual <- as.factor(piloto$Individual)
 piloto$Device <- as.factor(piloto$Device)
 piloto$Type <- as.factor(piloto$Type)
