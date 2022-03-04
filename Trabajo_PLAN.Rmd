@@ -1,6 +1,6 @@
 ---
 title: "PLAN"
-author: "Gabriel Carbonell, Eduardo Rodríguez, Lucas"
+author: "Gabriel Carbonell, Eduardo Rodríguez, Lucas Naranjo García"
 date: "7/3/2022"
 output: pdf_document
 ---
