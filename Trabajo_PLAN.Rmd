@@ -1,6 +1,6 @@
 ---
 title: "PLAN"
-author: "Gabriel Carbonell, Eduardo Rodríguez, Lucas Naranjo García"
+author: "Gabriel Carbonell, Eduardo Rodríguez, Lucas"
 date: "7/3/2022"
 output: pdf_document
 ---
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Realizamos un experimento piloto con tres réplicas iniciales. Cada réplica pertenece a un bloque. Cargamos los datos:
 
 ```{r}
-piloto <- read.csv2("data/piloto.csv", header = TRUE, sep = ";")
+piloto <- read.csv2("/Users/Lucas/downloads/piloto.csv", header = TRUE, sep = ";")
 piloto$Individual <- as.factor(piloto$Individual)
 piloto$Device <- as.factor(piloto$Device)
 piloto$Type <- as.factor(piloto$Type)
@@ -24,9 +24,51 @@ piloto$Type <- as.factor(piloto$Type)
 
 A continuación, realizamos el cálculo de potencia:
 
-```{r}
+En primer lugar calculamos el Delta:
 
+```{r}
+piloto.aov <- aov(Count ~ Individual + Device * Type, data = piloto)
+summary(piloto.aov)
 ```
+
+Usamos el sigma=sqrt(mmE) para realizar el cálculo de potencia.
+
+#Número de réplicas para efectos principales:
+Queremos detectar los efectos principales del dispositivo (2 niveles) y la visibilidad (2 niveles) para Δ = 5 y𝜎 = 5.24 (sqrt(mmE))
+
+```{r}
+library(daewr)
+sigma <- sqrt(27.42) ; 
+alpha <- .05; 
+Delta <- 6; 
+nlev <- c(2,2) 
+rmin <- 2; 
+rmax <- 9; 
+nreps <- c(rmin:rmax)
+### <b>
+power <- Fpower2(alpha, nlev, nreps, Delta, sigma) ### </b>
+options(digits = 5)
+power
+```
+#Número de réplicas para interacciones:
+Queremos detectar interacciones entre el dispositivo  (2 niveles) y la viibilidad (2 niveles), con Δ = 6 y suponiendo 𝜎 = 5.24 (lo tratamos como ANOVA de un factor con 2x2=4 niveles):
+```{r}
+library(daewr)
+sigma <- sqrt(27.42) 
+alpha <- .05
+Delta <- 6
+nlev <- 2*2 
+rmin <- 5
+rmax <- 18
+nreps <- c(rmin:rmax)
+power <- Fpower1(alpha, nlev, nreps, Delta, sigma) 
+options(digits = 5)
+power
+```
+Para ver una diferencia significativa con una potencia del 80% necesitaríamos 18 réplicas.
+
+Puesto que hay tres bloques, cada bloque tendrá que repetir cada  cruce de factores 6 veces.
+
 
 ## ANOVA
 
