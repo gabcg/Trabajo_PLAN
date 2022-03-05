@@ -134,13 +134,29 @@ palabras.mean <- rename(palabras.mean,
                         Device = Group.2,
                         Type = Group.3,
                         Count = x)
+```
 
+A continuación, realizamos ANOVA con el siguiente modelo:
 
+$$
+Palabras_i = \mu + \beta_{Dispositivo, d(i)} + \beta_{Test,t(i)} + \alpha\beta_{d(i),t(i)}+\epsilon_i
+$$
+
+```{r}
 palabras.aov.mean <- aov(Count ~ Device + Type + Individual + Device*Type, data = palabras.mean)
 summary(palabras.aov.mean)
 ```
 
-Vemos que solo el dispositivo es significativo. También el bloque. El tipo de test o su interacción con el dispositivo no lo son.
+Vemos que solo el dispositivo es significativo. También el bloque. El tipo de test o su interacción con el dispositivo no lo son. Por ello, consideramos el modelo sin interacción:
+
+$$
+Palabras_i = \mu + \beta_{Dispositivo, d(i)} + \beta_{Test,t(i)} +\epsilon_i
+$$
+
+```{r}
+palabras.aov.mean <- aov(Count ~ Device + Type + Individual, data = palabras.mean)
+summary(palabras.aov.mean)
+```
 
 A continuación, comprobamos las condiciones de aplicabilidad.
 
@@ -168,25 +184,33 @@ plot(palabras.aov)
 ```
 Se observa que la varianza de los residuos es estable, y que los residuos se ajustan a la normalidad.
 
-Por último, estimamos los parámetros del modelo:
+## Estimación de parámetros del modelo
+
+Realizamos una estimación de los parámetros del modelo propuesto, sin interacción y promediando pseudo-réplicas.
 
 ```{r}
 mu <- mean(palabras.mean$Count); mu
 model.tables(palabras.aov.mean)
 ```
 
-### Estimación de parámetros del modelo
+Por tanto, nuestro modelo tendría la fórmula:
 
-```{r}
-mu <- mean(palabras$Count); mu
-model.tables(palabras.aov)
-```
+$$
+\begin{array}
+
+Palabras_i = 38.083 + 
+5 \ I(d_i = Ordenador) - 5 \ I(d_i = Smartphone)
+- 0.4167 \ I(t_i = Medio) + 0.4167 \ I(t_i = Blind)
++ 1.958 \ I(I_i = 1) -4.208 \ I(I_i = 2) + 2.250 \ I(I_i = 3)
+\end{array}
+
+$$
 
 ## Análisis post
 
 ```{r}
-# palabras.tukey <- TukeyHSD(palabras.tukey, ordered = T, which = "matriz")
-# palabras.tukey
+palabras.tukey <- TukeyHSD(palabras.aov.mean, ordered = T, which = "Device")
+palabras.tukey
 ```
 
 
