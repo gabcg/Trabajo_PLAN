@@ -7,6 +7,7 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(daewr)
 ```
 
 ## Introducción
@@ -35,7 +36,6 @@ Usamos el $\sigma = \sqrt{mmE}$ para realizar el cálculo de potencia.
 Queremos detectar los efectos principales del dispositivo (2 niveles) y la visibilidad (2 niveles) para $\Delta = 5$ y $\sigma = 5.24$ ($\sqrt{mmE}$)
 
 ```{r}
-library(daewr)
 sigma <- sqrt(27.42) ; 
 alpha <- .05; 
 Delta <- 6; 
@@ -54,7 +54,6 @@ power
 Queremos detectar interacciones entre el dispositivo  (2 niveles) y la viibilidad (2 niveles), con $\Delta = 6$ y suponiendo $\sigma = 5.24$ (lo tratamos como ANOVA de un factor con 2x2=4 niveles):
 
 ```{r}
-library(daewr)
 sigma <- sqrt(27.42) 
 alpha <- .05
 Delta <- 6
