@@ -139,7 +139,7 @@ palabras.mean <- rename(palabras.mean,
 A continuación, realizamos ANOVA con el siguiente modelo:
 
 $$
-Palabras_i = \mu + \beta_{Dispositivo, d(i)} + \beta_{Test,t(i)} + \alpha\beta_{d(i),t(i)}+\epsilon_i
+Palabras_i = \mu + \beta_{Individuo,I(i)} + \beta_{Dispositivo, d(i)} + \beta_{Test,t(i)} + \alpha\beta_{d(i),t(i)}+\epsilon_i
 $$
 
 ```{r}
@@ -150,7 +150,7 @@ summary(palabras.aov.mean)
 Vemos que solo el dispositivo es significativo. También el bloque. El tipo de test o su interacción con el dispositivo no lo son. Por ello, consideramos el modelo sin interacción:
 
 $$
-Palabras_i = \mu + \beta_{Dispositivo, d(i)} + \beta_{Test,t(i)} +\epsilon_i
+Palabras_i = \mu + \beta_{Individuo,I(i)} + \beta_{Dispositivo, d(i)} + \beta_{Test,t(i)} +\epsilon_i
 $$
 
 ```{r}
@@ -182,6 +182,7 @@ Observamos que los factores significativos son el dispositivo empleado y el bloq
 par(mfrow = c(2,2))
 plot(palabras.aov)
 ```
+
 Se observa que la varianza de los residuos es estable, y que los residuos se ajustan a la normalidad.
 
 ## Estimación de parámetros del modelo
@@ -196,14 +197,11 @@ model.tables(palabras.aov.mean)
 Por tanto, nuestro modelo tendría la fórmula:
 
 $$
-\begin{array}
-
-Palabras_i = 38.083 + 
-5 \ I(d_i = Ordenador) - 5 \ I(d_i = Smartphone)
+\begin{array}{*}
+Palabras_i = 38.083 + 1.958 \ I(I_i = 1) -4.208 \ I(I_i = 2) + 2.250 \ I(I_i = 3) \\
++ 5 \ I(d_i = Ordenador) - 5 \ I(d_i = Smartphone) \\
 - 0.4167 \ I(t_i = Medio) + 0.4167 \ I(t_i = Blind)
-+ 1.958 \ I(I_i = 1) -4.208 \ I(I_i = 2) + 2.250 \ I(I_i = 3)
 \end{array}
-
 $$
 
 ## Análisis post
@@ -213,4 +211,5 @@ palabras.tukey <- TukeyHSD(palabras.aov.mean, ordered = T, which = "Device")
 palabras.tukey
 ```
 
+## Conclusiones
 
