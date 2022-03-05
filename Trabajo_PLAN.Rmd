@@ -1,6 +1,6 @@
 ---
-title: "PLAN"
-author: "Gabriel Carbonell, Eduardo Rodríguez, Lucas Naranjo García"
+title: "Comparativa de velocidad de escritura según el dispositivo y el tipo de test de velocidad"
+author: "Gabriel Carbonell, Eduardo Rodríguez, Lucas Naranjo"
 date: "7/3/2022"
 output: pdf_document
 ---
@@ -8,6 +8,7 @@ output: pdf_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(daewr)
+library(tidyverse)
 ```
 
 ## Introducción
@@ -53,7 +54,7 @@ Primero realizaremos una serie de test nosotros para poder calcular cuántas ré
 Realizamos un experimento piloto con tres réplicas iniciales. Cada réplica pertenece a un bloque. Cargamos los datos:
 
 ```{r}
-piloto <- read.csv2("/Users/Lucas/downloads/piloto.csv", header = TRUE, sep = ";")
+piloto <- read.csv2("data/piloto.csv", header = TRUE, sep = ";")
 piloto$Individual <- as.factor(piloto$Individual)
 piloto$Device <- as.factor(piloto$Device)
 piloto$Type <- as.factor(piloto$Type)
@@ -79,8 +80,7 @@ nlev <- c(2,2)
 rmin <- 2; 
 rmax <- 9; 
 nreps <- c(rmin:rmax)
-### <b>
-power <- Fpower2(alpha, nlev, nreps, Delta, sigma) ### </b>
+power <- Fpower2(alpha, nlev, nreps, Delta, sigma)
 options(digits = 5)
 power
 ```
@@ -111,27 +111,71 @@ Puesto que hay tres bloques, cada bloque tendrá que repetir cada  cruce de fact
 En primer lugar, cargamos los datos.
 
 ```{r}
-palabras <- read.csv2("data.csv", header = TRUE, sep = ";")
-piloto$Individual <- as.factor(piloto$Individual)
-piloto$Device <- as.factor(piloto$Device)
-piloto$Type <- as.factor(piloto$Type)
+palabras <- read.csv2("data/data.csv", header = TRUE, sep = ";")
+palabras$Individual <- as.factor(palabras$Individual)
+palabras$Device <- as.factor(palabras$Device)
+palabras$Type <- as.factor(palabras$Type)
 ```
+
+
+### ANOVA promediando pseudo-réplicas
+
+Al haberse realizado seis pseudo-réplicas por bloque, en primer lugar se realiza una promediación de estas:
+
+```{r}
+palabras.mean <- aggregate(palabras$Count,
+                           by = list(palabras$Individual,
+                                     palabras$Device,
+                                     palabras$Type),
+                           FUN=mean)
+
+palabras.mean <- rename(palabras.mean,
+                        Individual = Group.1,
+                        Device = Group.2,
+                        Type = Group.3,
+                        Count = x)
+
+
+palabras.aov.mean <- aov(Count ~ Device + Type + Individual + Device*Type, data = palabras.mean)
+summary(palabras.aov.mean)
+```
+
+Vemos que solo el dispositivo es significativo. También el bloque. El tipo de test o su interacción con el dispositivo no lo son.
+
+A continuación, comprobamos las condiciones de aplicabilidad.
+
+```{r}
+par(mfrow = c(2,2))
+plot(palabras.aov.mean)
+```
+
+Observamos que no se cumplen las condiciones de aplicabilidad en cuanto a la varianzas. Hay cierto ajuste de los residuos a la normalidad en el QQ-plot.
+
+### ANOVA sin pseudo-réplicas
 
 Realizamos el ANOVA a partir del modelo propuesto.
 
 ```{r}
-palabras.aov <- aov(Count ~ Device + Type, data = palabras)
+palabras.aov <- aov(Count ~ Device + Type + Individual + Device*Type, data = palabras)
 summary(palabras.aov)
 ```
 
-Comprobamos las condiciones de aplicabilidad.
+Observamos que los factores significativos son el dispositivo empleado y el bloque en sí. Tanto el tipo de test (texto medio o *blind test*) como su interacción son poco significativos. A continuación, comprobamos las condiciones de aplicabilidad.
 
 ```{r}
 par(mfrow = c(2,2))
 plot(palabras.aov)
 ```
+Se observa que la varianza de los residuos es estable, y que los residuos se ajustan a la normalidad.
 
-## Estimación de parámetros del modelo
+Por último, estimamos los parámetros del modelo:
+
+```{r}
+mu <- mean(palabras.mean$Count); mu
+model.tables(palabras.aov.mean)
+```
+
+### Estimación de parámetros del modelo
 
 ```{r}
 mu <- mean(palabras$Count); mu
@@ -141,8 +185,8 @@ model.tables(palabras.aov)
 ## Análisis post
 
 ```{r}
-palabras.tukey <- TukeyHSD(palabras.tukey, ordered = T, which = "matriz")
-palabras.tukey
+# palabras.tukey <- TukeyHSD(palabras.tukey, ordered = T, which = "matriz")
+# palabras.tukey
 ```
 
 
