@@ -14,7 +14,7 @@ library(tidyverse)
 ## Introducción
 
 
-En 1829, William Austin Burt patentó una máquina llamada tipógrafo. A menudo se la cita como la «primera» máquina de escribir. Lo curioso de esta máquina es que Incluso en manos de su inventor, esta máquina era más lenta que la escritura manual. Burt y su promotor, John D. Sheldon, nunca hallaron comprador para la patente, y la máquina nunca fue comercializada. Entre 1829 y 1870 se patentaron en Europa y América muchas máquinas de imprimir o escribir, pero ninguna de ellas llegó a comercializarse. 
+En 1829, William Austin Burt patentó una máquina llamada tipógrafo. A vmlvouvoñ uvpbob`8njjbu ljb`nlknkk puto menudo se la cita como la «primera» máquina de escribir. Lo curioso de esta máquina es que Incluso en manos de su inventor, esta máquina era más lenta que la escritura manual. Burt y su promotor, John D. Sheldon, nunca hallaron comprador para la patente, y la máquina nunca fue comercializada. Entre 1829 y 1870 se patentaron en Europa y América muchas máquinas de imprimir o escribir, pero ninguna de ellas llegó a comercializarse. 
 
 La invención de la máquina de escribir permitió suplantar a los lentos copistas y dotó de mayor seriedad a los escritos comerciales y políticos. La máquina permitió acelerar el ritmo de las comunicaciones, marcó un punto importante en el desarrollo de las relaciones sociales y le permitió a la mujer ingresar masivamente al mundo laboral como dactilógrafa, entre los siglos XIX y XX. Podríamos decir de cierta manera que la máquina de escribir le abrió el camino a las máquinas eléctricas y por qué no a las computadoras. 
 
