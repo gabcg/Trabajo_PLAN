@@ -49,14 +49,14 @@ Elegimos el primer factor fijo ya que pensamos que puede haber diferencia signif
 
 El segundo factor fijo también es una diferencia clara en la naturaleza, además intentamos emular cuando las máquinas de escribir como hemos dicho antes, no veían lo que iban escribiendo. Intentaremos observar si se aprecian diferencias.
 
-Hemos elegido los bloques ya que pensamos que existe variabilidad en el proceso y sobretodo en las personas que lo realizan ya que cada una es distinta con sus características pero no nos interesa estudiar las diferencias entre ellas, simplemente queremos no perder esta variabilidad comentada. No tendría sentido comparar la velocidad del sujeto A usando smartphone con la del sujeto B usando teclado físico. Si hiciesemos tal comparación, la varianza entre estas dos velocidades se puede deber a las diferentes  habilidades de los sujetos o a la calidad del teclado o  smartphone.
+Hemos elegido los bloques ya que pensamos que existe variabilidad en el proceso y sobretodo en las personas que lo realizan ya que cada una es distinta con sus características pero no nos interesa estudiar las diferencias entre ellas, simplemente queremos no perder esta variabilidad comentada. No tendría sentido comparar la velocidad del sujeto A usando *smartphone* con la del sujeto B usando teclado físico. Si hiciesemos tal comparación, la varianza entre estas dos velocidades se puede deber a las diferentes  habilidades de los sujetos o a la calidad del teclado o *smartphone*.
 
 Primero realizaremos una serie de test nosotros para poder calcular cuántas réplicas necesitamos y la potencia necesaria. Después realizaremos los test necesarios que nos hayan salido y analizaremos mediante ANOVA si hay diferencias significativas. Por último realizaremos una conclusión para cerrar nuestras hipótesis.
 
 
 ## Cálculo de potencia 
 
-Realizamos un experimento piloto con una réplica por cruce y por bloque(n= (2*3*3)= 18 observaciones. Cargamos los datos:
+Realizamos un experimento piloto con una réplica por cruce y por bloque ($n= (2\cdot3\cdot3)= 18$ observaciones. Cargamos los datos:
 
 ```{r}
 piloto <- read.csv2("data/piloto.csv", header = TRUE, sep = ";")
@@ -65,7 +65,7 @@ piloto$Device <- as.factor(piloto$Device)
 piloto$Type <- as.factor(piloto$Type)
 ```
 
- En primer lugar elegimos  $\Delta$ = 6 :
+En primer lugar elegimos  $\Delta = 6$ :
 
 ```{r}
 piloto.aov <- aov(Count ~ Individual + Device * Type, data = piloto)
@@ -74,7 +74,8 @@ summary(piloto.aov)
 
 Usamos el $\sigma = \sqrt{mmE}$ para realizar el cálculo de potencia.
 
-#Número de réplicas para efectos principales:
+**Número de réplicas para efectos principales.**
+
 Queremos detectar los efectos principales del dispositivo (2 niveles) y la visibilidad (2 niveles) para $\Delta = 6$ y $\sigma = 5.24$ ($\sqrt{mmE}$)
 
 ```{r}
@@ -90,7 +91,7 @@ options(digits = 5)
 power
 ```
 
-#Número de réplicas para interacciones:
+**Número de réplicas para interacciones.**
 
 Queremos detectar interacciones entre el dispositivo  (2 niveles) y la viibilidad (2 niveles), con $\Delta = 6$ y suponiendo $\sigma = 5.24$ (lo tratamos como ANOVA de un factor con 2x2=4 niveles):
 
@@ -125,10 +126,9 @@ palabras$Type <- as.factor(palabras$Type)
 
 ### ANOVA promediando pseudo-réplicas
 
-#Justificación de promediar las pseudo réplicas
+Hemos visto en clase que en caso de ser posible, es preferible aumentar el número de bloques al número de réplicas dentro de cada bloque. En nuestra situación, los test se pueden repetir facilmente y con coste nulo, por eso decidimos que sería más fácil aumentar el número de veces que cada bloque hace el test.
 
-Hemos visto en clase que en caso de ser posible, es preferible aumentar el número de bloques al número de réplicas dentro de cada bloque. En nuestra situación, los test se pueden repetir facilmente y con coste nulo, por eso decidimos que sería más fácil aumentar el número de veces que cada bloque hace el test. 
-En parte la idea de promediar las pseudo réplicas viene dada por un ejemplo que vimos en clase, el de la ditancia de lanzamiento de pelotas de golf. En ese experimento, no interesaba observar la diferencia entre jugadores, por eso la creación d ebloques es necesaria. Como en ese experimente también era relativemente simple de hacer y era rápido pedirle más réplicas a cada jugador, así se hizo. En la página 127 de libro DAEWR recomiendan promediar las pseudo-réplicas de cada jugador de golf.
+En parte la idea de promediar las pseudo réplicas viene dada por un ejemplo que vimos en clase, el de la distancia de lanzamiento de pelotas de golf. En ese experimento, no interesaba observar la diferencia entre jugadores, por ello la creación de bloques es necesaria. Como en ese experimente también era relativemente simple de hacer y era rápido pedirle más réplicas a cada jugador, así se hizo. En la página 127 de libro DAEWR recomiendan promediar las pseudo-réplicas de cada jugador de golf.
 
 Al haberse realizado seis pseudo-réplicas por bloque, en primer lugar se realiza una promediación de estas:
 
@@ -212,16 +212,10 @@ Palabras_i = 38.083 + 1.958 \ I(I_i = 1) -4.208 \ I(I_i = 2) + 2.250 \ I(I_i = 3
 0.4167 \ I(t_i = Medio) + 0.4167 \ I(t_i = Blind) 
 \end{array}
 $$
-El efecto  más significativo es el del tipo de dispositivo. Si miramos los 
-estimadores del sus parámetros podemos observar que de media, con teclado se 
-escriben 10 palabras más por minuto.
-También se observan hasta más de 6 palabras por minuto e diferencia entre el 
-individuo más lento y el más veloz, lo que sugiere que hacer bloques ha sido una
-buena idea.
-El último resultado a tener en cuenta,un tanto sorprendente aunque no tan 
-significativo, es que de media se escribe ligeramente más rápido 
-en los test a ciegas que en el test con visibiidad. Probablemente esto se deba a 
-que En el test ha ciegas no "perdemos" tiempo releyendo lo que hemos escrito.
+El efecto  más significativo es el del tipo de dispositivo. Si miramos los estimadores del sus parámetros podemos observar que de media, con teclado se escriben 10 palabras más por minuto. También se observan hasta más de 6 palabras por minuto de diferencia entre el 
+individuo más lento y el más veloz, lo que sugiere que hacer bloques ha sido una buena idea.
+
+El último resultado a tener en cuenta,un tanto sorprendente aunque no tan significativo, es que de media se escribe ligeramente más rápido en los test a ciegas que en el test con visibilidad Probablemente esto se deba a que en el test ha ciegas no "perdemos" tiempo releyendo lo que hemos escrito.
 
 ## Análisis post
 
@@ -229,17 +223,12 @@ que En el test ha ciegas no "perdemos" tiempo releyendo lo que hemos escrito.
 palabras.tukey <- TukeyHSD(palabras.aov.mean, ordered = T, which = "Device")
 palabras.tukey
 ```
-Realizamos un test tukey para comparar la media entre smartphone y el teclado.
-Observamos que hay una diferencia de unas 10 palabras por minuto, con un 
-intervalo 
-de entre 6.1 y 13.8 PPM y un p-valor muy inferior a 0.05.
+
+Realizamos un test Tukey para comparar la media entre smartphone y el teclado. Observamos que hay una diferencia de unas 10 palabras por minuto, con un intervalo de entre 6.1 y 13.8 PPM y un p-valor muy inferior a 0.05.
 
 ## Conclusiones
 
-Este estudio, que ha sido un mero ejercicio de aplicación de los conociemientos que hemos estudiado en la asignatura nos ha aportado también algo de información sobre la mecanografía. Como era de esperar  En un teclado físico parecemos ser generalmente más rápidos que en un smartphone, pese a que seguramente escribimos más con smartphone que con teclado. Por mucho que el uso de las pantallas táctiles se popularizen, en un teclado físico estamos usando nuestros 10 dedos y en un smartphone solo los dos pulgares.
-El consejo que sugiere este estudio es un tanto obvio: si quieres ecribir más rápido 
-usa un teclado físico. Una de las condiciones que permite dar este consejo 
-generalizado es que la interaccion dispositivo-individuo no salga significativa. Caso contrario, no podríamos aconsejar un dispositivo por encima de otro puesto que una interacción significtiva se traduce en que según a qué individuo el dispositivo le hace un efecto u otro.
+Este estudio, que ha sido un mero ejercicio de aplicación de los conociemientos que hemos estudiado en la asignatura nos ha aportado también algo de información sobre la mecanografía. Como era de esperar en un teclado físico parecemos ser generalmente más rápidos que en un *smartphone*, pese a que seguramente escribimos más con este que con teclado físico. Por mucho que el uso de las pantallas táctiles se popularize, en un teclado físico se pueden usar hasta 10 dedos, mientras que en un *smartphone* solo los dos pulgares.
 
+Por tanto, el estudio sugiere que si se quiere escribir a mayor velocidad es recomendable el uso de un teclado físico. Una de las condiciones que permite dar este consejo generalizado es que la interaccion dispositivo-individuo no sea significativa. En caso contrario, no podríamos aconsejar un dispositivo por encima de otro puesto que una interacción significtiva se traduciría en que según a qué individuo el dispositivo le hace un efecto u otro.
 
-...
