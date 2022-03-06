@@ -1,12 +1,10 @@
 ---
 title: Comparativa de velocidad de escritura según el dispositivo y el tipo de test
   de velocidad
-author: "Gabriel Carbonell, Eduardo Rodríguez, Lucas Naranjo"
+author: "Gabriel Carbonell, Lucas Naranjo, Eduardo Rodríguez"
 date: "7/3/2022"
 output:
   pdf_document: default
-  html_document:
-    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -16,7 +14,6 @@ library(tidyverse)
 ```
 
 ## Introducción
-
 
 En 1829, William Austin Burt patentó una máquina llamada tipógrafo. A menudo se la cita como la «primera» máquina de escribir. Lo curioso de esta máquina es que, incluso en manos de su inventor, esta máquina era más lenta que la escritura manual. Burt y su promotor, John D. Sheldon, nunca hallaron comprador para la patente, y la máquina nunca fue comercializada. Entre 1829 y 1870 se patentaron en Europa y América muchas máquinas de imprimir o escribir, pero ninguna de ellas llegó a comercializarse. 
 
@@ -65,14 +62,14 @@ piloto$Device <- as.factor(piloto$Device)
 piloto$Type <- as.factor(piloto$Type)
 ```
 
-En primer lugar elegimos  $\Delta = 6$ :
+En primer lugar elegimos $\Delta = 6$ :
 
 ```{r}
 piloto.aov <- aov(Count ~ Individual + Device * Type, data = piloto)
 summary(piloto.aov)
 ```
 
-Usamos el $\sigma = \sqrt{mmE}$ para realizar el cálculo de potencia.
+Empleamos el $\sigma = \sqrt{mmE}$ para realizar el cálculo de potencia.
 
 **Número de réplicas para efectos principales.**
 
@@ -176,24 +173,6 @@ plot(palabras.aov.mean)
 
 Observamos que no se cumplen las condiciones de aplicabilidad en cuanto a la varianzas. Hay cierto ajuste de los residuos a la normalidad en el QQ-plot.
 
-### ANOVA sin pseudo-réplicas
-
-Realizamos el ANOVA a partir del modelo propuesto.
-
-```{r}
-palabras.aov <- aov(Count ~ Device + Type + Individual + Device*Type, data = palabras)
-summary(palabras.aov)
-```
-
-Observamos que los factores significativos son el dispositivo empleado y el bloque en sí. Tanto el tipo de test (texto medio o *blind test*) como su interacción son poco significativos. A continuación, comprobamos las condiciones de aplicabilidad.
-
-```{r}
-par(mfrow = c(2,2))
-plot(palabras.aov)
-```
-
-Se observa que la varianza de los residuos es estable, y que los residuos se ajustan a la normalidad.
-
 ## Estimación de parámetros del modelo
 
 Realizamos una estimación de los parámetros del modelo propuesto, sin interacción y promediando pseudo-réplicas.
@@ -231,5 +210,4 @@ Realizamos un test Tukey para comparar la media entre smartphone y el teclado. O
 
 Este estudio, que ha sido un mero ejercicio de aplicación de los conociemientos que hemos estudiado en la asignatura nos ha aportado también algo de información sobre la mecanografía. Como era de esperar en un teclado físico parecemos ser generalmente más rápidos que en un *smartphone*, pese a que seguramente escribimos más con este que con teclado físico. Por mucho que el uso de las pantallas táctiles se popularize, en un teclado físico se pueden usar hasta 10 dedos, mientras que en un *smartphone* solo los dos pulgares.
 
-Por tanto, el estudio sugiere que si se quiere escribir a mayor velocidad es recomendable el uso de un teclado físico. Una de las condiciones que permite dar este consejo generalizado es que la interaccion dispositivo-individuo no sea significativa. En caso contrario, no podríamos aconsejar un dispositivo por encima de otro puesto que una interacción significtiva se traduciría en que según a qué individuo el dispositivo le hace un efecto u otro.
-
+Por tanto, el estudio sugiere que si se quiere escribir a mayor velocidad es recomendable el uso de un teclado físico.
