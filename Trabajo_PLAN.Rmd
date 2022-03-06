@@ -36,7 +36,7 @@ Los resultados serán medidos en palabras por minuto.
 
 Debido a que hemos elegido estas opciones el diseño de nuestro experimento quedará como:
 
-* Unidad de observación: el sujeto retranscribiendo un texto digitalmente, en cada momento.
+* Unidad experimental: el sujeto retranscribiendo un texto digitalmente.
 * Variable respuesta: palabras por minuto.
 * Factor fijo: tipo de dispositivo con 2 niveles: teclado de ordenador y smartphone.
 * Factor fijo: viendo el texto que se escribe y “blind typing” (sin ver el texto que se escribe)
@@ -172,6 +172,19 @@ plot(palabras.aov.mean)
 ```
 
 Observamos que no se cumplen las condiciones de aplicabilidad en cuanto a la varianzas. Hay cierto ajuste de los residuos a la normalidad en el QQ-plot.
+
+```{r}
+library(MASS)
+
+
+bc <- boxcox(Count ~ Device + Type + Individual, data = palabras.mean)
+(lambda <- bc$x[which.max(bc$y)])
+new.aov <-aov(((Count^lambda-1)/lambda) ~ Device + Type + Individual, data = palabras.mean); summary(new.aov)
+
+par(mfrow = c(2,2))
+plot(new.aov)
+```
+
 
 ## Estimación de parámetros del modelo
 
