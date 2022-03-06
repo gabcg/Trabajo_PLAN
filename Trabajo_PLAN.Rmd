@@ -4,6 +4,7 @@ title: Comparativa de velocidad de escritura según el dispositivo y el tipo de 
 author: "Gabriel Carbonell, Eduardo Rodríguez, Lucas Naranjo"
 date: "7/3/2022"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 ---
