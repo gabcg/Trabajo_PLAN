@@ -173,19 +173,6 @@ plot(palabras.aov.mean)
 
 Observamos que no se cumplen las condiciones de aplicabilidad en cuanto a la varianzas. Hay cierto ajuste de los residuos a la normalidad en el QQ-plot.
 
-```{r}
-library(MASS)
-
-
-bc <- boxcox(Count ~ Device + Type + Individual, data = palabras.mean)
-(lambda <- bc$x[which.max(bc$y)])
-new.aov <-aov(((Count^lambda-1)/lambda) ~ Device + Type + Individual, data = palabras.mean); summary(new.aov)
-
-par(mfrow = c(2,2))
-plot(new.aov)
-```
-
-
 ## Estimación de parámetros del modelo
 
 Realizamos una estimación de los parámetros del modelo propuesto, sin interacción y promediando pseudo-réplicas.
@@ -218,6 +205,8 @@ palabras.tukey
 ```
 
 Realizamos un test Tukey para comparar la media entre smartphone y el teclado. Observamos que hay una diferencia de unas 10 palabras por minuto, con un intervalo de entre 6.1 y 13.8 PPM y un p-valor muy inferior a 0.05.
+
+\pagebreak
 
 ## Conclusiones
 
