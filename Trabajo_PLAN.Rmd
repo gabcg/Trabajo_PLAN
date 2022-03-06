@@ -14,37 +14,37 @@ library(tidyverse)
 ## Introducción
 
 
-En 1829, William Austin Burt patentó una máquina llamada tipógrafo. A menudo se la cita como la «primera» máquina de escribir. Lo curioso de esta máquina es que, incluso en manos de su inventor, esta máquina era más lenta que la escritura manual. Burt y su promotor, John D. Sheldon, nunca hallaron comprador para la patente, y la máquina nunca fue comercializada. Entre 1829 y 1870 se patentaron en Europa y América muchas máquinas de imprimir o escribir, pero ninguna de ellas llegó a comercializarse. 
+En 1829, William Austin Burt patentó una máquina llamada tipógrafo. pues una prueba de cómo
 
 La invención de la máquina de escribir permitió suplantar a los lentos copistas y dotó de mayor seriedad a los escritos comerciales y políticos. La máquina permitió acelerar el ritmo de las comunicaciones, marcó un punto importante en el desarrollo de las relaciones sociales y le permitió a la mujer ingresar masivamente al mundo laboral como dactilógrafa, entre los siglos XIX y XX. Podríamos decir de cierta manera que la máquina de escribir le abrió el camino a las máquinas eléctricas y por qué no a las computadoras. 
 
-La primera máquina de escribir con éxito comercial real fue inventada en 1872 por Christopher Sholes, Carlos Glidden y Samuel W. Soulé. En 1873, Remington inició la producción de su primera máquina de escribir.
+La primera máquina de escribir con éxito comercial real fue inventada en 1872 por Christopher Sholes,​ Carlos Glidden y Samuel W. Soulé. En 1873, Remington inició la producción de su primera máquina de escribir.
 
 La característica de ver lo que se iba mecanografiando a medida que se escribía se da por supuesta en la actualidad. Sin embargo, en la mayoría de las primeras máquinas de escribir, los tipos golpeaban subiendo contra el fondo del rodillo. Por ello, lo que se escribía no era visible hasta que las siguientes líneas escritas hacían que el papel se deslizase, dejándolo a la vista. La dificultad con cualquier otra disposición era asegurar que los tipos volvían a caer adecuadamente a su lugar cuando se soltaba la tecla. Esto fue finalmente logrado con diversos diseños mecánicos ingeniosos, y las llamadas «máquinas de escribir visibles» fueron comercializadas hacia 1895. 
-
+​
 A mediados del siglo siguiente, llegaría la invención de los ordenadores cambiando la forma de escribir, digitalizando todo. Esto repercutiría en las máquinas de escribir siendo la última producida en 2012.
 
-Debido a que nuestro profesor de planificación de la investigación Rubén nos mandó que diseñaramos un experimento, mis compañeros y yo nos pusimos a la obra. 
 
+Debido a que nuestro profesor de planificación de la investigación Rubén  nos mandó que diseñaramos un experimento, mis compañeros y yo nos pusimos a la obra. 
 Viendo que nuestra capacidad economica, tiempo y recursos son limitados para hacer algo muy grande que requiera de muchas personas involucradas (pues somos solo 3 integrantes) decidimos que un buen experimento (habiendo leído sobre las máquinas de escribir y picandonos la curiosidad) sería comprobar cómo de rápido escribe cada uno usando un teclado de ordenador y nuestros smartphones.
 
-El experimento consiste en realizar una serie de test de la página *TypingTest.com*. En esta página podemos cambiar diferentes opciones para realizar los tests, entre las que están la dificultad, la duración en minutos y otras opciones como *blind typing* que ocultará lo que vamos escribiendo.
+El experimento consiste en realizar una serie de test de la página “TypingTest.com”. En esta página podemos cambiar diferentes opciones para realizar los tests. Entre las distintas opciones podemos encontrar la dificultad del test, variando entre fácil, medio o dificil; el tiempo que dura el test:1,2,3…; y otras opciones como “blind typing” que ocultará lo que vamos escribiendo.
 
-Nosotros elegimos el test medio y de 1 minuto de duración. Además realizaremos los test con el teclado del ordenador con la opción *blind typing* y sin ella. Lo repetiremos con el smartphone.
+Nosotros elegimos el test medio y de 1 minuto de duración. Además realizaremos los test con el teclado del ordenador con la opción blind typing y sin ella. Lo repetiremos con el smartphone.
 Los resultados serán medidos en palabras por minuto.
+
 
 Debido a que hemos elegido estas opciones el diseño de nuestro experimento quedará como:
 
-* Variable respuesta: palabras por minuto.
-* Factor fijo: tipo de dispositivo con 2 niveles: teclado de ordenador y smartphone.
-* Factor fijo: viendo el texto que se escribe y “blind typing” (sin ver el texto que se escribe)
-* Bloque: las personas que realizan el experimento junto con sus características, diferencias etc.
+Variable respuesta: palabras por minuto.
+Factor fijo: tipo de dispositivo con 2 niveles: teclado de ordenador y smartphone.
+Factor fijo: viendo el texto que se escribe y “blind typing” (sin ver el texto que se escribe)
+Bloque: las personas que realizan el experimento junto con sus características, diferencias etc.
 
 Elegimos el primer factor fijo ya que pensamos que puede haber diferencia significativa entre los distintos dispositivos. Es fijo ya que nos interesa estudiar la media entre ambos y las diferencias que podamos encontrar, además de ser dos grupos que ya existen diferenciados en la naturaleza como tal.
-
 El segundo factor fijo también es una diferencia clara en la naturaleza, además intentamos emular cuando las máquinas de escribir como hemos dicho antes, no veían lo que iban escribiendo. Intentaremos observar si se aprecian diferencias.
-
 Hemos elegido los bloques ya que pensamos que existe variabilidad en el proceso y sobretodo en las personas que lo realizan ya que cada una es distinta con sus características pero no nos interesa estudiar las diferencias entre ellas, simplemente queremos no perder esta variabilidad comentada.
+
 
 Primero realizaremos una serie de test nosotros para poder calcular cuántas réplicas necesitamos y la potencia necesaria. Después realizaremos los test necesarios que nos hayan salido y analizaremos mediante ANOVA si hay diferencias significativas. Por último realizaremos una conclusión para cerrar nuestras hipótesis.
 
@@ -212,6 +212,4 @@ palabras.tukey
 ```
 
 ## Conclusiones
-
-...
 
